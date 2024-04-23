@@ -1,7 +1,7 @@
 # TabView-NavigableView
 
 ## Overview
-This document outlines the structure and functionality of a SwiftUI application designed to demonstrate a robust navigation system. The application manages multiple navigation states for different tabs and supports modal presentations with individual navigation contexts.
+The application manages multiple navigation states for different tabs and supports modal presentations with individual navigation contexts.
 
 ## Key Components
 
