@@ -32,32 +32,4 @@ The application manages multiple navigation states for different tabs and suppor
 
 ## Usage Examples
 
-### Navigate to a View
-To navigate to a different view within the same tab:
-```swift
-@EnvironmentObject var navigationState: NavigationState
-
-Button("Go to Profile") {
-    navigationState.push(route: .profile)
-}
-```
-
-### Present a Modal
-To display a modal with its own navigation context:
-```swift
-@EnvironmentObject var navigationState: NavigationState
-
-Button("Show Settings Modal") {
-    navigationState.presentModal(route: .settings)
-}
-```
-
-### Navigation within a Modal
-To navigate within a modal to a second level detail view:
-```swift
-@EnvironmentObject var navigationState: NavigationState
-
-Button("Go to Detailed Settings") {
-    navigationState.pushModal(route: .modal2)
-}
-```
+### WIP
