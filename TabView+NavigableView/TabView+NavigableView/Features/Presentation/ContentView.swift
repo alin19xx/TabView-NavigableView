@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct HomeView: View {
     @EnvironmentObject var navigationState: NavigationState
 
