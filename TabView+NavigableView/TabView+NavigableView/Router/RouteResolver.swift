@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct RouteResolver: View {
+    @EnvironmentObject var appContainer: AppContainer
+    
     var route: Route
 
     var body: some View {
         switch route {
         case .home:
-            HomeView()
+            HomeView(viewModel: appContainer.homeViewModel)
         case .profile:
             ProfileView()
         case .settings:

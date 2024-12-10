@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @StateObject private var appContainer = AppContainer()
+    
     @StateObject private var homeNavState = NavigationState()
     @StateObject private var profileNavState = NavigationState()
     
@@ -15,7 +17,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            NavigableView(content: HomeView(),
+            NavigableView(content: HomeView(viewModel: appContainer.homeViewModel),
                           navigationState: homeNavState)
             .tabItem {
                 Label("Home", systemImage: "house")
@@ -29,6 +31,7 @@ struct MainTabView: View {
             }
             .tag("profile")
         }
+        .environmentObject(appContainer) // Inject the container
     }
 }
 

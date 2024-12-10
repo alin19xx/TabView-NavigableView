@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-struct HomeView: View {
-    @EnvironmentObject var navigationState: NavigationState
-
-    var body: some View {
-        VStack {
-            Button("Go to Profile") {
-                navigationState.push(route: .detail)
-            }
-        }
-        .navigationTitle("Home View")
-    }
-}
-
 struct DetailView: View {
     @EnvironmentObject var navigationState: NavigationState
 
@@ -30,20 +17,6 @@ struct DetailView: View {
             }
         }
         .navigationTitle("Detail View")
-    }
-}
-
-struct ProfileView: View {
-    @EnvironmentObject var navigationState: NavigationState
-
-    var body: some View {
-        VStack {
-            Text("Profile View")
-            Button("Go to Profile") {
-                navigationState.push(route: .settings)
-            }
-        }
-        .navigationTitle("Profile View")
     }
 }
 
@@ -86,6 +59,7 @@ struct Modal2View: View {
         }
     }
 }
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView()
+//        .environmentObject(NavigationState())
+//}

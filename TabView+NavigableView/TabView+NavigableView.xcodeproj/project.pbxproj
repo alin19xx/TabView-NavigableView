@@ -17,8 +17,14 @@
 		C75B50F62BD7FD2A003E5CBA /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75B50F52BD7FD2A003E5CBA /* Route.swift */; };
 		C75B50F82BD7FD33003E5CBA /* RouteResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75B50F72BD7FD33003E5CBA /* RouteResolver.swift */; };
 		C75B50FA2BD7FD3F003E5CBA /* NavigableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75B50F92BD7FD3F003E5CBA /* NavigableView.swift */; };
-		C75B50FC2BD7FD4A003E5CBA /* NavigableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75B50FB2BD7FD4A003E5CBA /* NavigableState.swift */; };
 		C75B50FE2BD7FDA3003E5CBA /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75B50FD2BD7FDA3003E5CBA /* MainTabView.swift */; };
+		C79B74E02D08A52600DA5161 /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74DF2D08A52600DA5161 /* NavigationState.swift */; };
+		C79B74E32D08A5D800DA5161 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74E22D08A5D800DA5161 /* HomeView.swift */; };
+		C79B74E52D08A60500DA5161 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74E42D08A60500DA5161 /* HomeViewModel.swift */; };
+		C79B74E72D08A73E00DA5161 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74E62D08A73E00DA5161 /* User.swift */; };
+		C79B74EA2D08A77900DA5161 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74E92D08A77900DA5161 /* ProfileView.swift */; };
+		C79B74EC2D08A79800DA5161 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74EB2D08A79800DA5161 /* ProfileViewModel.swift */; };
+		C79B74EF2D08AB4900DA5161 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79B74EE2D08AB4900DA5161 /* AppContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +58,14 @@
 		C75B50F52BD7FD2A003E5CBA /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		C75B50F72BD7FD33003E5CBA /* RouteResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteResolver.swift; sourceTree = "<group>"; };
 		C75B50F92BD7FD3F003E5CBA /* NavigableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigableView.swift; sourceTree = "<group>"; };
-		C75B50FB2BD7FD4A003E5CBA /* NavigableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigableState.swift; sourceTree = "<group>"; };
 		C75B50FD2BD7FDA3003E5CBA /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		C79B74DF2D08A52600DA5161 /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
+		C79B74E22D08A5D800DA5161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C79B74E42D08A60500DA5161 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		C79B74E62D08A73E00DA5161 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C79B74E92D08A77900DA5161 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C79B74EB2D08A79800DA5161 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C79B74EE2D08AB4900DA5161 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +116,7 @@
 		C75B50C42BD7FCA8003E5CBA /* TabView+NavigableView */ = {
 			isa = PBXGroup;
 			children = (
+				C79B74ED2D08AB1600DA5161 /* Environment */,
 				C75B50FD2BD7FDA3003E5CBA /* MainTabView.swift */,
 				C75B50F42BD7FD21003E5CBA /* Router */,
 				C75B50F02BD7FCD3003E5CBA /* Features */,
@@ -158,6 +171,8 @@
 		C75B50F12BD7FCDB003E5CBA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C79B74E82D08A76800DA5161 /* Profile */,
+				C79B74E12D08A5C100DA5161 /* Home */,
 				C75B50C72BD7FCA8003E5CBA /* ContentView.swift */,
 			);
 			path = Presentation;
@@ -166,12 +181,39 @@
 		C75B50F42BD7FD21003E5CBA /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				C79B74DF2D08A52600DA5161 /* NavigationState.swift */,
 				C75B50F52BD7FD2A003E5CBA /* Route.swift */,
 				C75B50F72BD7FD33003E5CBA /* RouteResolver.swift */,
 				C75B50F92BD7FD3F003E5CBA /* NavigableView.swift */,
-				C75B50FB2BD7FD4A003E5CBA /* NavigableState.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		C79B74E12D08A5C100DA5161 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C79B74E22D08A5D800DA5161 /* HomeView.swift */,
+				C79B74E42D08A60500DA5161 /* HomeViewModel.swift */,
+				C79B74E62D08A73E00DA5161 /* User.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C79B74E82D08A76800DA5161 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C79B74E92D08A77900DA5161 /* ProfileView.swift */,
+				C79B74EB2D08A79800DA5161 /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		C79B74ED2D08AB1600DA5161 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				C79B74EE2D08AB4900DA5161 /* AppContainer.swift */,
+			);
+			path = Environment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,13 +346,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C79B74EF2D08AB4900DA5161 /* AppContainer.swift in Sources */,
 				C75B50FA2BD7FD3F003E5CBA /* NavigableView.swift in Sources */,
+				C79B74E52D08A60500DA5161 /* HomeViewModel.swift in Sources */,
+				C79B74E02D08A52600DA5161 /* NavigationState.swift in Sources */,
 				C75B50C82BD7FCA8003E5CBA /* ContentView.swift in Sources */,
 				C75B50F62BD7FD2A003E5CBA /* Route.swift in Sources */,
 				C75B50F82BD7FD33003E5CBA /* RouteResolver.swift in Sources */,
+				C79B74EC2D08A79800DA5161 /* ProfileViewModel.swift in Sources */,
+				C79B74E32D08A5D800DA5161 /* HomeView.swift in Sources */,
 				C75B50FE2BD7FDA3003E5CBA /* MainTabView.swift in Sources */,
+				C79B74E72D08A73E00DA5161 /* User.swift in Sources */,
+				C79B74EA2D08A77900DA5161 /* ProfileView.swift in Sources */,
 				C75B50C62BD7FCA8003E5CBA /* TabView_NavigableViewApp.swift in Sources */,
-				C75B50FC2BD7FD4A003E5CBA /* NavigableState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
