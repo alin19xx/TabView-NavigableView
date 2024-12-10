@@ -46,15 +46,48 @@ struct MainTabView: View {
     }
 }
 ```
-### **2. NavigationState**
-Handles the navigation stack for each tab:
+
+### **2. NavigableView**
+
+The `NavigableView` is a reusable wrapper that provides a dedicated `NavigationStack` for managing routes and modal presentations. Each `NavigableView` is connected to a specific `NavigationState`, allowing independent navigation within tabs or modals.
+
+```swift
+struct NavigableView<Content: View>: View {
+    let content: Content
+    @ObservedObject var navigationState: NavigationState
+    
+    var body: some View {
+        NavigationStack(path: $navigationState.routes) {
+            content
+                .navigationDestination(for: Route.self) { route in
+                    RouteResolver(route: route)
+                }
+        }
+        .environmentObject(navigationState)
+        .sheet(isPresented: $navigationState.showModal) {
+            NavigationStack(path: $navigationState.modalRoutes) {
+                if let route = navigationState.modalRoute {
+                    RouteResolver(route: route)
+                        .navigationDestination(for: Route.self) { route in
+                            RouteResolver(route: route)
+                        }
+                }
+            }
+            .environmentObject(navigationState)
+        }
+    }
+}
+```
+
+### **3. NavigationState**
+Manages the navigation stack for each tab and modal. This class provides functions to control navigation hierarchies, ensuring that navigation flows are independent and reusable across tabs.
 
 ```swift
 class NavigationState: ObservableObject {
-    @Published var routes: [Route] = []
-    @Published var showModal: Bool = false
-    @Published var modalRoute: Route?
-    @Published var modalRoutes: [Route] = []
+    @Published var routes: [Route] = []            // Stack of routes for in-tab navigation
+    @Published var showModal: Bool = false         // Controls modal visibility
+    @Published var modalRoute: Route?              // Stores the current modal route
+    @Published var modalRoutes: [Route] = []       // Stack of routes inside a modal
 
     func push(route: Route) { routes.append(route) }
     func popTo(_ route: Route) { ... }
@@ -66,9 +99,9 @@ class NavigationState: ObservableObject {
 
 ```
 
-### **3. RouteResolver**
+### **4. RouteResolver**
 
-Resolves routes dynamically to the appropriate view:
+Resolves navigation routes dynamically to the appropriate view. This ensures that navigation is modular and scalable, as each route is mapped to its corresponding view.
 
 ```swift
 struct RouteResolver: View {
@@ -94,9 +127,9 @@ struct RouteResolver: View {
 }
 ```
 
-### **4. AppContainer**
+### **5. AppContainer**
 
-A centralized container for managing ViewModels:
+A centralized container for managing shared ViewModels and state across the app. This pattern ensures a single source of truth for app-wide dependencies while keeping the code modular and testable.
 
 ```swift
 class AppContainer: ObservableObject {
