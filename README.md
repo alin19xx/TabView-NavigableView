@@ -1,35 +1,107 @@
-# TabView-NavigableView
+# SwiftUI Navigable TabView with State Management
 
-## Overview
-The application manages multiple navigation states for different tabs and supports modal presentations with individual navigation contexts.
+This project demonstrates a scalable, clean, and reactive architecture for managing navigation within a `TabView` in SwiftUI. Each tab has its own navigation stack and supports modal presentation, while maintaining separate state management for each view.
 
-## Key Components
+---
 
-### `TabView_NavigableViewApp`
-- **Description**: The entry point of the SwiftUI application, setting up the main window group containing the `MainTabView`.
+## **Features**
 
-### `MainTabView`
-- **Description**: Manages the tab view that contains all primary sections of the app. Each tab is backed by its own navigation state to maintain the user's navigation history independently.
+- **Independent Navigation State**: Each tab maintains its own navigation stack using the `NavigationState` class.
+- **Modular Design**: Views are independent and interact with their respective `ViewModels`.
+- **Dynamic Routing**: Navigation to routes (`Route`) is resolved using `RouteResolver`.
+- **Reactive State**: State updates are automatically reflected in the views, ensuring a seamless user experience.
+- **Scalable and Testable**: The architecture follows principles of Clean Architecture, making it easy to add new features and write unit tests.
 
-### `NavigableView`
-- **Description**: A generic view component that manages the navigation stack for its content. It integrates with `NavigationStack` to support forward and backward navigation within each tab or modal.
+---
 
-### `RouteResolver`
-- **Description**: Determines the appropriate view to render based on the current navigation route. It simplifies the navigation logic by centralizing route handling.
+## **Project Structure**
 
-### `NavigationState`
-- **Description**: Manages the navigation routes for the application, including the ability to push new routes, pop to previous routes, and handle modal presentations.
+### **1. MainTabView**
+The entry point of the app, managing the `TabView` with independent navigation states for each tab:
 
-### `Route`
-- **Description**: An enumeration defining all navigable routes in the application, facilitating easy management and extension of the app's navigation paths.
+```swift
+struct MainTabView: View {
+    @StateObject private var appContainer = AppContainer()
+    @StateObject private var homeNavState = NavigationState()
+    @StateObject private var profileNavState = NavigationState()
+    @State private var selectedTab: String = "home"
+    
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            NavigableView(content: HomeView(viewModel: appContainer.homeViewModel),
+                          navigationState: homeNavState)
+            .tabItem {
+                Label("Home", systemImage: "house")
+            }
+            .tag("home")
+            
+            NavigableView(content: ProfileView(),
+                          navigationState: profileNavState)
+            .tabItem {
+                Label("Profile", systemImage: "person")
+            }
+            .tag("profile")
+        }
+        .environmentObject(appContainer) // Inject the AppContainer for shared state
+    }
+}
+```
+### **2. NavigationState**
+Handles the navigation stack for each tab:
 
-## Features
+```swift
+class NavigationState: ObservableObject {
+    @Published var routes: [Route] = []
+    @Published var showModal: Bool = false
+    @Published var modalRoute: Route?
+    @Published var modalRoutes: [Route] = []
 
-- **Independent Tab Navigation**: Each tab maintains its own navigation stack, allowing seamless switching between tabs without losing state.
-- **Dynamic View Rendering**: Based on the navigation state, `NavigableView` dynamically renders views using `RouteResolver`.
-- **Modal Navigation**: Supports presenting modals with their own navigation stacks, ideal for complex sub-flows within modals.
-- **Comprehensive State Management**: Through `NavigationState`, the app handles complex navigational interactions, ensuring robust state management across the user interface.
+    func push(route: Route) { routes.append(route) }
+    func popTo(_ route: Route) { ... }
+    func popToRoot() { routes.removeAll() }
+    func pop() { ... }
+    func presentModal(route: Route) { ... }
+    func dismissModal() { ... }
+}
 
-## Usage Examples
+```
 
-### WIP
+### **3. RouteResolver**
+
+Resolves routes dynamically to the appropriate view:
+
+```swift
+struct RouteResolver: View {
+    @EnvironmentObject var appContainer: AppContainer
+    var route: Route
+
+    var body: some View {
+        switch route {
+        case .home:
+            HomeView(viewModel: appContainer.homeViewModel)
+        case .profile:
+            ProfileView()
+        case .settings:
+            SettingsView()
+        case .modal:
+            ModalView()
+        case .modal2:
+            Modal2View()
+        case .detail:
+            DetailView()
+        }
+    }
+}
+```
+
+### **4. AppContainer**
+
+A centralized container for managing ViewModels:
+
+```swift
+class AppContainer: ObservableObject {
+    @Published var homeViewModel = HomeViewModel()
+    @Published var profileViewModel = ProfileViewModel(user: User(id: UUID(), name: "Default User", age: 25))
+    ...
+}
+```
